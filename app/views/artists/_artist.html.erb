@@ -1,0 +1,10 @@
+<li>
+  
+  <%= link_to artist.name, artist %>
+  <% if current_user.admin? %>
+  
+  | <%= link_to "delete", artist, :method => :delete, :confirm => "You sure?",
+                                :title => "Delete #{artist.name}" %>
+  <% end %>
+  
+</li>

@@ -1,0 +1,18 @@
+<h2><%= @song.name %></h2>
+<b>Singer: </b>
+<% unless @song.artists.empty? %>
+
+<% max = @song.artists.size %>
+<% i = 1 %>
+	<% begin %>	
+	<%= link_to @song.artists.find(i).name , @song.artists.find(i) %> 
+	<% i = i + 1 %>
+	<% end while i < max %>
+  
+<% end %>
+<br/>
+<b>Lyric:</b>
+<p><%= simple_format(@song.lyric) %></p>
+
+<%= link_to "Edit this song", edit_song_path(@song) %>
+<!-- simple_format make newline char display normally --!>

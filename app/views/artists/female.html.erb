@@ -1,0 +1,13 @@
+<h1>All Artists</h1>
+
+<%= link_to "Female", female_path %> | 
+<%= link_to "Male", male_path %> |
+<%= link_to "Group", group_path %>
+
+<%= will_paginate %>
+
+<ul class="artists">
+  <%= render @artists %>
+</ul>
+
+<%= will_paginate %>

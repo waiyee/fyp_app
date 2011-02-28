@@ -1,0 +1,13 @@
+<h2><%= @album.name %></h2>
+<ol>
+<% unless @album.songs.empty? %>
+
+<% max = @album.songs.size %>
+<% i = 1 %>
+	<% begin %>	
+	<li><%= link_to @album.songs.find(i).name , @album.songs.find(i) %> </li>
+	<% i = i + 1 %>
+	<% end while i < max %>
+  
+<% end %>
+</ol>
