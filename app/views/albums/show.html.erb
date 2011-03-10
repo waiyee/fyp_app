@@ -3,11 +3,11 @@
 <% unless @album.songs.empty? %>
 
 <% max = @album.songs.size %>
-<% i = 1 %>
+<% i = 0 %>
 	<% begin %>	
-	<li><%= link_to @album.songs.find(i).name , @album.songs.find(i) %> </li>
+	<li><%= link_to @album.songs[i].name , @album.songs[i] %> </li>
 	<% i = i + 1 %>
-	<% end while i < max %>
+	<% end while i < max -1 %>
   
 <% end %>
 </ol>

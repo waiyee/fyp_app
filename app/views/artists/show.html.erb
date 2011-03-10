@@ -4,4 +4,18 @@
 <h4>Biography: </h4>
 <p><%= @artist.bio %></p>
 
-<%= link_to "Edit this artist", edit_artist_path(@song) %>
+<h4>Albums: </h4>
+<ol>
+<% unless @artist.albums.empty? %>
+
+<% max = @artist.albums.size %>
+<% i = 0 %>
+	<% begin %>	
+	<li><%= link_to @artist.albums[i].name , @artist.albums[i] %> </li>
+	<% i = i + 1 %>
+	<% end while i < max -1 %>
+  
+<% end %>
+</ol>
+
+<%= link_to "Edit this artist", edit_artist_path(@artist) %>

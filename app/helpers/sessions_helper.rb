@@ -19,6 +19,14 @@ module SessionsHelper
 	#!session[:remember_token].nil?
   end
   
+  def authenticate
+      deny_access unless signed_in?
+    end
+	
+  def admin_user
+      redirect_to(root_path) unless current_user.admin?
+  end
+  
   def sign_out
     cookies.delete(:remember_token)
 	#reset_session

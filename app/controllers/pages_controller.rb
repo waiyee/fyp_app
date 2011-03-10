@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-
+  before_filter :authenticate, :only => [ :admin]
+  before_filter :admin_user, :only => [ :admin]
   def home
     @title = "Home"
   end
@@ -14,5 +15,9 @@ class PagesController < ApplicationController
   
   def help
     @title = "Help"
+  end
+  
+  def admin
+    @tilte = "Admin"
   end
 end

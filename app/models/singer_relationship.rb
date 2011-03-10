@@ -11,6 +11,8 @@
 #
 
 class SingerRelationship < ActiveRecord::Base
+  validates :artist_id,  :presence => true
+  validates :song_id,  :presence => true
   belongs_to :song
   belongs_to :artist
 end

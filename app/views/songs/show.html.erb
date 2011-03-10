@@ -1,18 +1,36 @@
 <h2><%= @song.name %></h2>
-<b>Singer: </b>
+<h4><b>Singer: </b>
+
 <% unless @song.artists.empty? %>
 
-<% max = @song.artists.size %>
-<% i = 1 %>
-	<% begin %>	
-	<%= link_to @song.artists.find(i).name , @song.artists.find(i) %> 
-	<% i = i + 1 %>
-	<% end while i < max %>
+	<% max = @song.artists.size %>
+	<% i = 0 %>
+		<% begin %>	
+		<%= link_to @song.artists[i].name , @song.artists[i] %> 
+		<% i += 1 %>
+		<% end while i < max %>
   
 <% end %>
-<br/>
-<b>Lyric:</b>
+</h4>
+<h4><b>Lyric:</b></h4>
 <p><%= simple_format(@song.lyric) %></p>
-
-<%= link_to "Edit this song", edit_song_path(@song) %>
 <!-- simple_format make newline char display normally --!>
+
+<h4>Tag: </h4>
+<p>
+
+  <% tag_cloud(@tags, %w(css1 css2 css3 css4 css5)) do |tag, css_class| %>
+	<% present = @song.tags.include?(tag) %>
+	<% if present %>
+		<%= link_to tag.name, tag_path(tag.name), :class => css_class %>
+	<% end %>
+  <% end %>
+  
+</p>
+
+
+<% if signed_in? %>
+
+You <%= link_to "like", like_path(@song) %> this song<br/>
+<%= link_to "Edit this song", edit_song_path(@song) %>
+<% end %>

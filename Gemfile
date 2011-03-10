@@ -3,6 +3,8 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.4'
 gem 'gravatar_image_tag'
 gem 'will_paginate', '3.0.pre2'
+gem 'validates_timeliness', '~> 3.0.2'
+gem 'acts-as-taggable-on'
 
 group :development do
   gem 'rspec-rails', '2.5.0'

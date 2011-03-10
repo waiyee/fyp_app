@@ -1,9 +1,73 @@
+<script type="text/javascript">
+ 
+$(document).ready(function(){
+ 
+    var counter = parseInt($("#count").val());
+ 
+    $("#addButton").click(function () {
+ 
+	counter++;
+ 
+	var newTextBoxDiv = $(document.createElement('input'))
+	
+		
+	newTextBoxDiv.attr({ 	type: "text",
+							class: "tags_in",
+							name: "tag_list" + counter,
+							id: id="tag_list" + counter
+	});
+
+	newTextBoxDiv.appendTo("#TextBoxesGroup");
+ 
+	$('#count').replaceWith('<input id="count" name="song[count]" type="hidden" value="' + counter + '" />');
+	
+
+     });
+ 
+     $("#removeButton").click(function () {
+	if(counter==0){
+          alert("No more textbox to remove");
+          return false;
+       }   
+	
+        $("#tag_list" + counter).remove();
+		
+		counter--;
+		$('#count').replaceWith('<input id="count" name="song[count]" type="hidden" value="' + counter + '" />');
+
+     });
+
+  });
+</script>
+
 <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "textbox" %>
   </div>
   <div class="field">
     <%= f.label :lyric %><br />
     <%= f.text_area :lyric %>
   </div>
+  
+  
+    <div id="TextBoxesGroup">
+		<%= f.label :tag, :id=> "TextBoxDiv1" %>
+		<% if @tagsnum == 0 %>
+			<%= text_field_tag 'tag_list1', nil, :class =>"tags_in"%>
+			<%= f.hidden_field :count, :value =>1, :id=> "count"%>
+		<% else %>
+			<%= f.hidden_field :count, :value =>@tagsnum, :id=> "count"%>
+		<% end %>
+		
+		<% for i in 1..@tagsnum %>  
+			<% temp = "tag_list#{i}" %>
+			<%= text_field_tag temp, @tags[i-1] , :class =>"tags_in"  %>
+		<% end %>
+  </div>
+  
+
+
+<input type="button" value="Add More Tag" id="addButton">
+<input type="button" value="Remove Tag" id="removeButton">
+

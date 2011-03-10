@@ -1,14 +1,33 @@
 FypApp::Application.routes.draw do
-  
+
+
   resources :sessions, :only => [:new, :create, :destroy]
   resources :users
+  resources :songs
+  resources :artists
+  resources :albums
+  #resources :UserLikeSong
+  match '/like/:id', :to => 'UserLikeSongs#new' , :as =>"like"
+  
+  match '/addallsingersfrommj', :to => 'artists#addallsingersfrommj', :as =>"addallsingersfrommj"
+  match '/addfromcm', :to => 'artists#addfromcm', :as =>"addfromcm"
+  
+  match '/tag_cloud', :to => 'songs#tag_cloud'
+ 
+  match '/tag/:tag', :to => 'songs#tag', :as =>"tag"
 
+  match '/female', :to =>'artists#female', :as =>"female"
+  match '/male', :to =>'artists#male', :as =>"male"
+  match '/group', :to =>'artists#group', :as =>"group"
+  match '/addartist',  :to => 'artists#new'
+  match '/addsong',  :to => 'songs#new'
   match '/signup',  :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
+  match '/admin',    :to => 'pages#admin'
   
   root :to => "pages#home"
   

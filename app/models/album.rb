@@ -16,6 +16,13 @@ class Album < ActiveRecord::Base
   validates :name,  :presence => true,
                     :length   => { :maximum => 200 }
 
-  has_many :album_songship	
-  has_many :songs, :through => :album_songship
+  #validates_date  :release_date, :before => (Time.now + 1.year) , :invalid_date_message => "needs a valid date"
+					
+  has_many :album_songships	
+  has_many :songs, :through => :album_songships
+  
+  has_many :album_artistships	
+  has_many :artists, :through => :album_artistships
+  
+  
 end

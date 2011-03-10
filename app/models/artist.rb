@@ -1,16 +1,19 @@
 # == Schema Information
-# Schema version: 20110228061729
+# Schema version: 20110304140406
 #
 # Table name: artists
 #
-#  id          :integer         primary key
-#  name        :string(255)
-#  artist_type :string(255)
-#  bio         :text
-#  created_at  :datetime
-#  updated_at  :datetime
-#  sex         :integer
-#  city_id     :integer
+#  id                :integer         not null, primary key
+#  name              :string(255)
+#  artist_type       :string(255)
+#  bio               :text
+#  created_at        :datetime
+#  updated_at        :datetime
+#  male_female_group :integer
+#  city_id           :integer
+#  MBID              :integer
+#  last_name         :string(255)
+#  first_name        :string(255)
 #
 
 class Artist < ActiveRecord::Base
@@ -20,6 +23,10 @@ class Artist < ActiveRecord::Base
 					
   has_many :singer_relationships	
   has_many :songs, :through => :singer_relationships
+  
+  has_many :album_artistships	
+  has_many :albums, :through => :album_artistships
+ 
   
   belongs_to :city
   

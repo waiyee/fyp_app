@@ -1,0 +1,14 @@
+<%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :"Release Date" %><br />
+    <%= f.text_field :release_date %> (YYYY-MM-DD)
+  </div>
+  <div class="field">
+    <%= f.label :"album type" %><br />
+    <%= select_tag(:album_type, options_for_select([['CD', 1], ['EP', 2], ['Single', 3], ['CD+DVD', 4], ['DVD', 5], ['Other', 6]], 1)) %>
+	
+  </div>
