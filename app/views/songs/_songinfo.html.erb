@@ -1,0 +1,17 @@
+<h2><%= @song.name %></h2>
+<h4><b>Singer: </b>
+
+<% unless @song.artists.empty? %>
+
+	<% max = @song.artists.size %>
+	<% i = 0 %>
+		<% begin %>	
+		<%= link_to @song.artists[i].name , @song.artists[i] %> 
+		<% i += 1 %>
+		<% end while i < max %>
+  
+<% end %>
+</h4>
+<h4><b>Lyric:</b></h4>
+<p><%= simple_format(@song.lyric) %></p>
+<!-- simple_format make newline char display normally --!>

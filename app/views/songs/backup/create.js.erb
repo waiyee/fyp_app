@@ -1,0 +1,33 @@
+<% temp = params[:artist_list1] == nil ? "" : params[:artist_list1] %>
+<% pass = true %>
+<% if temp.empty? %>
+  $("#flash_notice").hide(300);
+ 
+  $("#artist_errors").html("The song must have a least one singer.");
+ 
+  $("#artist_errors").show(300);
+  <% pass = false %>
+<% end %>
+<% if @song.errors.any? %>
+  $("#flash_notice").hide(300);
+ 
+  $("#song_errors").html("<%= escape_javascript(render 'shared/error_messages', :object => @song) %>");
+
+  $("#song_errors").show(300);
+  <% pass = false %>
+<% end%>
+
+<% if pass %>
+  $("#song_errors").hide(300);
+ 
+  $("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
+ 
+  $("#flash_notice").show(300);
+ 
+  $("#new_song").hide("fast");
+   
+  $("#new_song").replaceWith("<%= escape_javascript(render 'justcreate' ) %>");
+  
+  $("#new_song").show("slow");
+<% end %>
+

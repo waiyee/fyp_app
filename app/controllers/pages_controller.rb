@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_filter :admin_user, :only => [ :admin]
   def home
     @title = "Home"
+	@user = User.new
   end
 
   def contact

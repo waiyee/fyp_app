@@ -1,0 +1,77 @@
+$(document).ready(function(){
+ 
+    var counter = parseInt($("#count").val());
+ 
+    $("#addButton").click(function () {
+ 
+	counter++;
+ 
+	var newTextBoxDiv = $(document.createElement('input'))
+	
+		
+	newTextBoxDiv.attr({ 	type: "text",
+							class: "tags_in",
+							name: "tag_list" + counter,
+							id: id="tag_list" + counter
+	});
+
+	newTextBoxDiv.appendTo("#TextBoxesGroup");
+ 
+	$('#count').replaceWith('<input id="count" name="song[count]" type="hidden" value="' + counter + '" />');
+	
+
+     });
+ 
+     $("#removeButton").click(function () {
+	if(counter==0){
+          alert("No more textbox to remove");
+          return false;
+       }   
+	
+        $("#tag_list" + counter).remove();
+		
+		counter--;
+		$('#count').replaceWith('<input id="count" name="song[count]" type="hidden" value="' + counter + '" />');
+
+     });
+	 
+
+	var artcounter = parseInt($("#artistcount").val());
+ 
+    $("#addArtist").click(function () {
+ 
+	artcounter++;
+ 
+	var newTextBoxDiv = $(document.createElement('input'))
+	
+		
+	newTextBoxDiv.attr({ 	type: "text",
+							class: "artist_in", 
+							name: "artist_list" + artcounter,
+							id: id="artist_list" + artcounter
+	});
+
+	newTextBoxDiv.appendTo("#ArtistBoxesGroup");
+ 
+	$('#artistcount').replaceWith('<input id="artistcount" name="song[artistcount]" type="hidden" value="' + artcounter + '" />');
+	
+
+     });
+ 
+     $("#removeArtist").click(function () {
+	if(artcounter==0){
+          alert("No more textbox to remove");
+          return false;
+       }   
+	
+        $("#artist_list" + artcounter).remove();
+		
+		artcounter--;
+		$('#artistcount').replaceWith('<input id="artistcount" name="song[artistcount]" type="hidden" value="' + artcounter + '" />');
+
+     });
+	 
+	
+	 
+
+  });

@@ -4,9 +4,22 @@
 <%= link_to "Songs", songs_path %>
 <br/>
 <%= link_to "Artists", artists_path %>
+<br/>
+<br/>
+<% if signed_in? %>
+<script src="http://connect.facebook.net/en_US/all.js#appId=197012066989004&amp;xfbml=1"></script><fb:live-stream event_app_id="197012066989004" width="400" height="500" xid="" always_post_to_friends="false"></fb:live-stream>
+<% else %>
 
-<% if !signed_in? %>
-  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+  <button id="signup_witho_fb">Signup without Facebook!</button>
+  
+  <button id="signup_with_fb" >Signup with Facebook => <%= fb_login_and_redirect(signupfb_path, :perms => 'email,user_birthday') %></button>
+  
+  <div id="edit-user-form">
+	<%= render 'users/fields' %>
+  </div>
+ 
 <% end %>
 
 
+
+	

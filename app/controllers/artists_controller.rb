@@ -4,9 +4,12 @@ require 'rexml/document'
 include REXML
 
 class ArtistsController < ApplicationController
+  
   before_filter :find_artist, :only => [ :show, :edit, :update]
   before_filter :authenticate, :only => [ :addallsingersfrommj, :addfromcm]
   before_filter :admin_user, :only => [ :addallsingersfrommj, :addfromcm]
+  
+  
   
   def index
     @title = "All Artists"

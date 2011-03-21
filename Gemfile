@@ -5,6 +5,10 @@ gem 'gravatar_image_tag'
 gem 'will_paginate', '3.0.pre2'
 gem 'validates_timeliness', '~> 3.0.2'
 gem 'acts-as-taggable-on'
+gem 'facebooker2'
+gem 'rails3-jquery-autocomplete'
+gem "fbgraph"
+
 
 group :development do
   gem 'rspec-rails', '2.5.0'

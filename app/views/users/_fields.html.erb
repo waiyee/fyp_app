@@ -1,12 +1,16 @@
-<%= render 'shared/error_messages', :object => f.object %>
+<%= form_for(@user, :html=>{:id=>"user-form"}) do |f| %>
+<p class="validateTips">All form fields are required.</p>
+
 <div class="field">
   <%= f.label :name %><br />
   <%= f.text_field :name %>
 </div>
+
 <div class="field">
   <%= f.label :email %><br />
   <%= f.text_field :email %>
 </div>
+
 <div class="field">
   <%= f.label :password %><br />
   <%= f.password_field :password %>
@@ -15,3 +19,4 @@
   <%= f.label :password_confirmation, "Confirmation" %><br />
   <%= f.password_field :password_confirmation %>
 </div>
+<% end %>

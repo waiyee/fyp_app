@@ -1,3 +1,4 @@
+
 <h2><%= @artist.name %></h2>
 <h4>Type of Artist</h4>
 <p><%= @artist.artist_type %></p>
@@ -18,4 +19,17 @@
 <% end %>
 </ol>
 
-<%= link_to "Edit this artist", edit_artist_path(@artist) %>
+
+<% if signed_in? %>
+<button id="edit-artist" >Edit Artist</button>
+<br/>
+
+
+<%= render 'shared/facebook_cm' %>
+
+
+<div id="edit-artist-form" title="Edit Artist"> 
+<%= render 'fields'%> 
+</div>
+
+<% end %>

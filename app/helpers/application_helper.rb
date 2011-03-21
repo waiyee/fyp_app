@@ -14,4 +14,5 @@ module ApplicationHelper
   def logo
     image_tag("fyplogo.png", :alt => "FYP App", :class => "round")
   end
+
 end

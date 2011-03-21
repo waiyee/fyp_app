@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
-  before_filter :correct_user, :only => [:edit, :update]
+  before_filter :correct_user, :only => [:edit, :update, :joining_facebook]
   before_filter :admin_user,   :only => :destroy
   before_filter :find_user, :only => [ :show,  :update, :destroy]
+  
+
   
   def index
     @title = "All users"
@@ -11,13 +13,44 @@ class UsersController < ApplicationController
   
   def show
     @title = @user.name
+	@userlike = @user.UserLikeSong.paginate(:page => params[:page])
   end
 
-  def new
-    if signed_in?
-		redirect_to root_path
+  def facebook_create
+	@user = User.new
+    if current_facebook_user
+	  current_facebook_user.fetch 
+	  @user.email = current_facebook_user.email
+	  @user.name = current_facebook_user.name
+	  @user.password = "facebook"
+	  @user.fb_id = current_facebook_user.id
+	  if @user.save
+	    sign_in @user
+		redirect_to @user
+	  else
+		
+	  end
+	end
+  end
+  
+  def joining_facebook
+	if current_facebook_user
+		current_facebook_user.fetch
+		if @user.email == current_facebook_user.email 
+			@user.fb_id = current_facebook_user.id
+			redirect_to @user
+		else
+		end		
 	else
-      @user = User.new
+		redirect_to root_path
+	end
+  end
+  
+  def new
+    @user = User.new
+	if signed_in?
+		redirect_to root_path
+	else     
       @title = "Sign up"
 	end
   end
@@ -25,6 +58,7 @@ class UsersController < ApplicationController
   def create
     if signed_in?
 	  redirect_to root_path
+	
 	else
       @user = User.new(params[:user])
 	  if @user.save

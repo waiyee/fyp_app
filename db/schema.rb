@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110310041259) do
+ActiveRecord::Schema.define(:version => 20110321111206) do
 
   create_table "album_artistships", :force => true do |t|
     t.integer  "album_id"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20110310041259) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.integer  "fb_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

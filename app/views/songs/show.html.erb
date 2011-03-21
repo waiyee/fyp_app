@@ -1,20 +1,5 @@
-<h2><%= @song.name %></h2>
-<h4><b>Singer: </b>
-
-<% unless @song.artists.empty? %>
-
-	<% max = @song.artists.size %>
-	<% i = 0 %>
-		<% begin %>	
-		<%= link_to @song.artists[i].name , @song.artists[i] %> 
-		<% i += 1 %>
-		<% end while i < max %>
-  
-<% end %>
-</h4>
-<h4><b>Lyric:</b></h4>
-<p><%= simple_format(@song.lyric) %></p>
-<!-- simple_format make newline char display normally --!>
+<div id="left">
+<%= render 'songinfo' %>
 
 <h4>Tag: </h4>
 <p>
@@ -28,9 +13,41 @@
   
 </p>
 
+<h3>Belongs to which albums </h3>
+<%= render @song.albums %>
+<hr/>
+<%= render 'shared/facebook_cm' %>
 
+
+</div>
+
+<div id="right">
 <% if signed_in? %>
+	You 
+	<% if isuserliked %>
+		<%= link_to 'unlike', unlike_path, :remote=> true %> 
+	<% else %>
+		<%= link_to 'like', like_path, :remote=> true  %> 
+	<% end %>	
+	this song<br/>
+	
 
-You <%= link_to "like", like_path(@song) %> this song<br/>
-<%= link_to "Edit this song", edit_song_path(@song) %>
+<fb:like href="http://127.0.0.1:3000<%= request.request_uri%>" show_faces="false" width="200" font="segoe ui"></fb:like>
+
+
+<br/>
+<button id="edit-song" >Edit Song</button>
+<br/>
+
+
+<div id="edit-song-form" title="Edit Song"> 
+<%= render 'fields'%> 
+</div>
+
 <% end %>
+
+</div>
+
+
+
+

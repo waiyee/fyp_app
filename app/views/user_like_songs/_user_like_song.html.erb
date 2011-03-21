@@ -1,0 +1,6 @@
+<tr>
+<td>
+	You have liked <%= link_to getsong(user_like_song.id).name, getsong(user_like_song.id) %> <br/>
+	Liked <%= time_ago_in_words(user_like_song.created_at) %> ago.
+</td>
+</tr>

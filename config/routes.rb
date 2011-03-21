@@ -3,11 +3,12 @@ FypApp::Application.routes.draw do
 
   resources :sessions, :only => [:new, :create, :destroy]
   resources :users
-  resources :songs
-  resources :artists
+  resources :songs 
+  resources :artists 
   resources :albums
-  #resources :UserLikeSong
+  
   match '/like/:id', :to => 'UserLikeSongs#new' , :as =>"like"
+  match '/unlike/:id', :to => 'UserLikeSongs#destroy' , :as =>"unlike"
   
   match '/addallsingersfrommj', :to => 'artists#addallsingersfrommj', :as =>"addallsingersfrommj"
   match '/addfromcm', :to => 'artists#addfromcm', :as =>"addfromcm"
@@ -22,6 +23,8 @@ FypApp::Application.routes.draw do
   match '/addartist',  :to => 'artists#new'
   match '/addsong',  :to => 'songs#new'
   match '/signup',  :to => 'users#new'
+  match '/signupfb',  :to => 'users#facebook_create', :as=> "signupfb"
+  match '/joiningfb/:id',  :to => 'users#joining_facebook', :as=> "joiningfb"
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/contact', :to => 'pages#contact'
@@ -35,6 +38,7 @@ FypApp::Application.routes.draw do
   get "pages/about"
   get "pages/contact"
   get "pages/help"
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

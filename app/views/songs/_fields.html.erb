@@ -1,52 +1,46 @@
-<script type="text/javascript">
- 
-$(document).ready(function(){
- 
-    var counter = parseInt($("#count").val());
- 
-    $("#addButton").click(function () {
- 
-	counter++;
- 
-	var newTextBoxDiv = $(document.createElement('input'))
-	
-		
-	newTextBoxDiv.attr({ 	type: "text",
-							class: "tags_in",
-							name: "tag_list" + counter,
-							id: id="tag_list" + counter
-	});
 
-	newTextBoxDiv.appendTo("#TextBoxesGroup");
- 
-	$('#count').replaceWith('<input id="count" name="song[count]" type="hidden" value="' + counter + '" />');
-	
 
-     });
- 
-     $("#removeButton").click(function () {
-	if(counter==0){
-          alert("No more textbox to remove");
-          return false;
-       }   
-	
-        $("#tag_list" + counter).remove();
-		
-		counter--;
-		$('#count').replaceWith('<input id="count" name="song[count]" type="hidden" value="' + counter + '" />');
+<div id="song_form">
 
-     });
+<div id="flash_notice" >
+			
+</div>
 
-  });
-</script>
+<%= form_for(@song,:html=>{:id=> "the-song-form"}) do |f| %>
+<p class="validateTips">All form fields are required.</p>
 
-<%= render 'shared/error_messages', :object => f.object %>
+
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label(:name,"Song Name") %><br />
     <%= f.text_field :name, :class => "textbox" %>
   </div>
+  
+  <div id="ArtistBoxesGroup">
+		<div id="artist_errors" ></div>
+
+		<%= label nil, "Artist Name", :id => "ArtistBoxDiv1" %><br />
+		<% aritstnum = @song.artists.size %>
+		<% if aritstnum == 0 %>
+			<%= text_field_tag 'artist_list1', nil, :class =>"artist_in", :id=> "artist_list1"%>
+			<%= f.hidden_field :artistcount, :value =>1, :id=> "artistcount"%>
+		<% else %>
+			<%= f.hidden_field :artistcount, :value =>aritstnum, :id=> "artistcount"%>
+		<% end %>
+		
+		<% for i in 1..aritstnum %>  
+			<% temp = "artist_list#{i}" %>
+			<%= text_field_tag temp, @song.artists[i-1].name  %>
+		<% end %>
+		
+  </div>
+  
+  <a href="#" id="addArtist">Add More Artist</a><br/>
+  <a href="#" id="removeArtist">Remove an Artist</a>
+
+  
+  
   <div class="field">
-    <%= f.label :lyric %><br />
+    <%= f.label(:lyric,"Lyric") %><br />
     <%= f.text_area :lyric %>
   </div>
   
@@ -62,12 +56,16 @@ $(document).ready(function(){
 		
 		<% for i in 1..@tagsnum %>  
 			<% temp = "tag_list#{i}" %>
-			<%= text_field_tag temp, @tags[i-1] , :class =>"tags_in"  %>
+			<%= text_field_tag temp, @edit_tags[i-1] , :class =>"tags_in"  %>
 		<% end %>
   </div>
   
+  <a href="#" id="addButton">Add More Tag</a><br/>
+  <a href="#" id="removeButton">Remove Tag</a>
 
 
-<input type="button" value="Add More Tag" id="addButton">
-<input type="button" value="Remove Tag" id="removeButton">
+
+<% end %>
+</div>
+
 

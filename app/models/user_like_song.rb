@@ -17,4 +17,6 @@ class UserLikeSong < ActiveRecord::Base
   
   belongs_to :song
   belongs_to :user
+  
+  default_scope :order => 'user_like_songs.created_at DESC'
 end

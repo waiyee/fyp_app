@@ -1,0 +1,22 @@
+			
+		$( ".destory" )
+			.button()
+			.click(function() {
+				$( ".delete_song" ).dialog( "open" );
+			});
+	
+			
+		$( ".delete_song" ).dialog({
+			resizable: false,
+			autoOpen: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Delete all items": function() {
+					$(this).closest('li').fadeOut();
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});

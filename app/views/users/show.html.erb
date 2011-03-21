@@ -1,3 +1,5 @@
+<div class="flash-notice">
+</div>
 <table class="profile" summary="Profile information">
   <tr>
     <td class="main">
@@ -6,10 +8,23 @@
         <%= @user.name %>
       </h1>
 	  
+	  <% unless @user.UserLikeSong.empty? %>
+	  <table>
+	  <%= render @userlike %>
+	  </table>
+	  <h3> Recommand to you</h3>
+	  <% @resong = similarsong(@user.UserLikeSong) %>
+
+	  <%= render @resong %>
+	  <% end %>
     </td>
     <td class="sidebar round">
       <strong>Name</strong> <%= @user.name %><br />
       <strong>URL</strong>  <%= link_to user_path(@user), @user %>
+	  
+	  <% if !current_facebook_user %>
+		  Why don't join your Facebook account with us? <%= fb_login_and_redirect(joiningfb_path, :perms => 'email,user_birthday') %>
+	  <% end %>
     </td>
   </tr>
 </table>

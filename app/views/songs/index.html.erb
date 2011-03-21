@@ -1,4 +1,9 @@
 <h1>All songs</h1>
+<% if signed_in? %>
+<button id="edit-song" >Create Song</button>
+
+<% end %>
+
 
 <%= will_paginate %>
 
@@ -8,4 +13,8 @@
 
 <%= will_paginate %>
 
-
+<% if signed_in? %>
+<div id="edit-song-form" title="Create Song"> 
+<%= render 'fields'%> 
+</div>
+<% end %>

@@ -5,7 +5,8 @@
   
   <% if signed_in? && current_user.admin? %>
   
-  | <%= link_to "delete", song, :method => :delete, :confirm => "You sure?",
+  |<%= link_to "delete", song, :method => :delete, :confirm => "You sure?", :remote => true,
+								:class=>'delete_song',
                                 :title => "Delete #{song.name}" %>
   
   <% end %>

@@ -80,17 +80,19 @@ nav ul li a:hover {
 
 /* Sign up button */
 
-a.signup_button {
+.signup_button {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
   display: block;
   text-align: center;
-  width: 190px;
+  width: 250px;
   color: #fff;
-  background: #006400;
+  background: lightblue;
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
+  
 }
 
 /* Round corners */
@@ -131,7 +133,19 @@ ul.users {
 .css4 { font-size: 18px; }
 .css5 { font-size: 20px; }
 
-input.tags_in {
+input.tags_in,input.artist_in  {
 	width: 100px;
 	margin-right: 5px;
+}
+
+#left{
+	width:70%;
+	
+}
+#right{
+	width: 30%;
+	float:right;
+	margin-left: 400px;
+	margin-top: -700px;
+	position: absolute;
 }
